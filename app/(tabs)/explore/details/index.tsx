@@ -6,6 +6,7 @@ import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { Link } from 'expo-router';
 
 export default function TabTwoScreen() {
   return (
@@ -26,9 +27,20 @@ export default function TabTwoScreen() {
           The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
           sets up the tab navigator.
         </ThemedText>
+        {/* <--
         <ExternalLink href="https://docs.expo.dev/router/introduction">
           <ThemedText type="link">Learn more</ThemedText>
         </ExternalLink>
+        --> */}
+        <Link href="/(tabs)/details/1">
+          Navigate to Details 1
+        </Link>
+        <Link href="/(tabs)/details/2">
+          Navigate to Details 2
+        </Link>
+        <Link href="/(tabs)/details/3">
+          Navigate to Details 3
+        </Link>
       </Collapsible>
       <Collapsible title="Android, iOS, and web support">
         <ThemedText>
