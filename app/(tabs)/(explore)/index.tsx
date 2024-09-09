@@ -32,15 +32,19 @@ export default function TabTwoScreen() {
           <ThemedText type="link">Learn more</ThemedText>
         </ExternalLink>
         --> */}
-        <Link href="/(tabs)/details/1">
-          Navigate to Details 1
+        <Link href="/details/1">
+          Go to Details 1
         </Link>
-        <Link href="/(tabs)/details/2">
+        <Link href="/details/2">
           Navigate to Details 2
         </Link>
-        <Link href="/(tabs)/details/3">
+        <Link href={{
+          pathname: '/details/[id]',
+          params: { id: "D.Q." }
+        }}>
           Navigate to Details 3
         </Link>
+        <Link href="/tictoctoe">Let's play Tic Tac Toe</Link>
       </Collapsible>
       <Collapsible title="Android, iOS, and web support">
         <ThemedText>
