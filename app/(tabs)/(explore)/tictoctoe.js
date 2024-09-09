@@ -51,30 +51,30 @@ const Board = () => {
 		status = "Next player: " + (xIsNext ? "X" : "O");
 	}
     return (
-        <>
-				<div>{status}</div>
-            <div>
+        <div style={styles.board}>
+            <div>{status}</div>
+            <div style={styles.boardRow}>
                 <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
                 <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
                 <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
             </div>
-            <div>
+            <div style={styles.boardRow}>
                 <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
                 <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
                 <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
             </div>
-            <div>
+            <div style={styles.boardRow}>
                 <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
                 <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
                 <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
             </div>
-        </>
+        </div>
     );
 };
 
 const TicTacToe = () => {
 	return (
-		<div>
+		<div style={styles.game}>
 			<Board />
 		</div>
 	)
@@ -82,17 +82,32 @@ const TicTacToe = () => {
 
 const styles = StyleSheet.create({
   square: {
-    background: '#7a7',
-    border: '2px solid #999',
-    float: 'left',
-    fontSize: 18,
-    fontWeight: 'bold',
-    // lineHeight: 34,
-    height: 34,
-    marginRight: -1,
-    marginTop: -1,
-    padding: 0,
-    width: 34,
+    background: '#7a7', // 设置方格的背景颜色为浅绿色
+    border: '2px solid #999', // 设置2像素宽的实线边框，颜色为深灰色
+    float: 'left', // 使方格向左浮动，以便它们能够并排排列
+    fontSize: 18, // 设置方格内文字的字体大小为18像素
+    fontWeight: 'bold', // 设置方格内文字为粗体
+    // lineHeight: 34, // 这行被注释掉了，原本用于设置行高
+    height: 34, // 设置方格的高度为34像素
+    marginRight: -1, // 右边距为-1像素，用于抵消边框重叠
+    marginTop: -1, // 上边距为-1像素，用于抵消边框重叠
+    padding: 0, // 设置内边距为0
+    width: 34, // 设置方格的宽度为34像素
+  },
+  board: {
+    display: 'flex', // 使用flexbox布局
+    flexDirection: 'column', // 设置flex容器的主轴方向为垂直
+    alignItems: 'center', // 在交叉轴（水平方向）上居中对齐子元素
+  },
+  boardRow: {
+    display: 'flex', // 使用flexbox布局
+    flexDirection: 'row', // 设置flex容器的主轴方向为水平
+  },
+  game: {
+    display: 'flex', // 使用flexbox布局
+    justifyContent: 'center', // 在主轴（水平方向）上居中对齐子元素
+    alignItems: 'center', // 在交叉轴（垂直方向）上居中对齐子元素
+    height: '100%', // 设置高度为父容器的100%
   },
 });
 
