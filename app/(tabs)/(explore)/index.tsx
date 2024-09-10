@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
+import { StyleSheet, Image, Platform, useColorScheme } from 'react-native';
 
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
@@ -8,7 +8,22 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Link } from 'expo-router';
 
+const theme = {
+  light: {
+    background: '#FFFFFF',
+    text: '#000000',
+    border: '#808080',
+  },
+  dark: {
+    background: '#000000',
+    text: '#FFFFFF',
+    border: '#808080',
+  },
+};
+
 export default function TabTwoScreen() {
+  const colorScheme = useColorScheme();
+  const colors = theme[colorScheme] || theme.light;
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -32,20 +47,20 @@ export default function TabTwoScreen() {
           <ThemedText type="link">Learn more</ThemedText>
         </ExternalLink>
         --> */}
-        <Link href="/details/1">
+        <Link href="/details/1" style={{ color: colors.text }}>
           Go to Details 1
         </Link>
-        <Link href="/details/2">
+        <Link href="/details/2" style={{ color: colors.text }}>
           Navigate to Details 2
         </Link>
         <Link href={{
           pathname: '/details/[id]',
           params: { id: "D.Q." }
-        }}>
+        }} style={{ color: colors.text }}>
           Navigate to Details 3
         </Link>
-        <Link href="/tictoctoe">Let's play Tic Tac Toe</Link>
-        <Link href="/ShaderGallery">Shader Gallery</Link>
+        <Link href="/tictoctoe" style={{ color: colors.text }}>Let's play Tic Tac Toe</Link>
+        <Link href="/ShaderGallery" style={{ color: colors.text }}>Shader Gallery</Link>
       </Collapsible>
       <Collapsible title="Android, iOS, and web support">
         <ThemedText>

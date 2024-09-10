@@ -1,54 +1,73 @@
 import React from 'react';
-import { View, Text, StyleSheet, useWindowDimensions } from 'react-native';
+import { View, Text, StyleSheet, useWindowDimensions, ScrollView, useColorScheme } from 'react-native';
 
 const numOfColumns = 3;
 
-const GridItem = ({ title, size }) => {
+const theme = {
+  light: {
+    background: '#FFFFFF',
+    text: '#000000',
+    border: '#808080',
+  },
+  dark: {
+    background: '#000000',
+    text: '#FFFFFF',
+    border: '#808080',
+  },
+};
+
+const GridItem = ({ title, size, colors }) => {
     return (
-        <View style={[styles.gridItem, { width: size, height: size }]}>
-            <Text style={styles.gridText}>{title}</Text>
+        <View style={[styles.gridItem, { width: size, height: size, borderColor: colors.border, backgroundColor: colors.background }]}>
+            <Text style={[styles.gridText, { color: colors.text }]}>{title}</Text>
         </View>
     )
 }
 
 const ShaderGallery = () => {
     const { width } = useWindowDimensions();
-    const containerPadding = styles.container.padding * 2;
-    const gridGap = styles.gridContainer.gap; // 网格之间的间距
+    const colorScheme = useColorScheme();
+    const colors = theme[colorScheme] || theme.light;
+
+    const containerPadding = styles.scrollViewContent.padding * 2;
+    const gridGap = styles.gridContainer.gap;
     const itemSize = (width - containerPadding - (numOfColumns - 1) * gridGap) / numOfColumns;
 
     const data = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
     
     return (
-        <View style={styles.container}>
+        <ScrollView style={[styles.scrollView, { backgroundColor: colors.background }]} contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.gridContainer}>
                 {data.map((item, index) => (
-                    <GridItem key={index} title={item} size={itemSize} />
+                    <GridItem key={index} title={item} size={itemSize} colors={colors} />
                 ))}
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 10,
+    scrollView: {
+        flex: 1, // 使 ScrollView 填满其父容器的可用空间
+    },
+    scrollViewContent: {
+        flexGrow: 2, // 允许内容在必要时增长以填满 ScrollView
+        padding: 10, // 在内容周围添加 10 单位的内边距
     },
     gridContainer: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        gap: 10, // 使用gap属性来设置网格之间的间距
+        flexDirection: 'row', // 使子元素在水平方向上排列
+        flexWrap: 'wrap', // 允许子元素在需要时换行
+        gap: 10, // 在网格项目之间添加 10 单位的间距（水平和垂直方向）
     },
     gridItem: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: 'gray',
+        justifyContent: 'center', // 在垂直方向上居中对齐内容
+        alignItems: 'center', // 在水平方向上居中对齐内容
+        borderWidth: 1, // 设置边框宽度为 1 单位
+        borderColor: 'gray', // 设置边框颜色为灰色
     },
     gridText: {
-        fontSize: 18,
-        fontWeight: 'bold',
+        fontSize: 18, // 设置文本大小为 18 单位
+        fontWeight: 'bold', // 设置文本为粗体
     }
 })
 
