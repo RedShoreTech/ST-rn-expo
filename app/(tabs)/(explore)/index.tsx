@@ -45,6 +45,7 @@ export default function TabTwoScreen() {
           Navigate to Details 3
         </Link>
         <Link href="/tictoctoe">Let's play Tic Tac Toe</Link>
+        <Link href="/ShaderGallery">Shader Gallery</Link>
       </Collapsible>
       <Collapsible title="Android, iOS, and web support">
         <ThemedText>

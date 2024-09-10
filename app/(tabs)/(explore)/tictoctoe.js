@@ -74,9 +74,14 @@ const Board = () => {
 
 const TicTacToe = () => {
 	return (
-		<div style={styles.game}>
-			<Board />
-		</div>
+    <>
+      <div style={styles.game}>
+        <Board />
+      </div>
+      <div>
+        <ol>{/* todo */}</ol>
+      </div>
+    </>
 	)
 };
 
