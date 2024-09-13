@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, useWindowDimensions, ScrollView, useColorScheme } from 'react-native';
+import { useState } from 'react';
+import { NativeCounterView } from '@/components/NativeCounterView';
 
 const numOfColumns = 3;
 
@@ -17,9 +19,19 @@ const theme = {
 };
 
 const GridItem = ({ title, size, colors }) => {
+    const [lastCount, setLastCount] = useState(0);
+
+    const handleCountChanged = (event: { nativeEvent: { count: number } }) => {
+        setLastCount(event.nativeEvent.count);
+    }
+
     return (
         <View style={[styles.gridItem, { width: size, height: size, borderColor: colors.border, backgroundColor: colors.background }]}>
             <Text style={[styles.gridText, { color: colors.text }]}>{title}</Text>
+            <NativeCounterView style={styles.nativeCounterView}
+                initialCount={lastCount}
+                onCountChanged={handleCountChanged}
+            />
         </View>
     )
 }
@@ -47,6 +59,12 @@ const ShaderGallery = () => {
 }
 
 const styles = StyleSheet.create({
+    nativeCounterView: {
+        width: 100,
+        height: 100,
+        borderWidth: 1,
+        borderColor: 'green',
+    },
     scrollView: {
         flex: 1, // 使 ScrollView 填满其父容器的可用空间
     },

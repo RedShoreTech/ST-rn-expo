@@ -22,6 +22,17 @@ class NativeCounterViewManager: RCTViewManager {
     }
   }
 
+  // 添加这个方法来设置 onCountChanged 回调
+  @objc func setOnCountChanged(_ node: NSNumber, onCountChanged: @escaping RCTDirectEventBlock) {
+    DispatchQueue.main.async {
+      if let view = self.bridge.uiManager.view(forReactTag: node) as? NativeCounterView {
+        view.onCountChanged = { count in
+          onCountChanged(["count": count])
+        }
+      }
+    }
+  }
+
   override static func requiresMainQueueSetup() -> Bool {
     return true
   }

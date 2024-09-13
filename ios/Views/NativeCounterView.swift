@@ -14,6 +14,7 @@ class NativeCounterView: UIView {
   private let button: UIButton
   private var count: Int = 0
 
+  @objc
   var onCountChanged: ((Int) -> Void)?
   
   override init(frame: CGRect) {
@@ -49,12 +50,14 @@ class NativeCounterView: UIView {
     ])
   }
 
-  @objc private func incrementCount() {
+  @objc
+  private func incrementCount() {
     count += 1
     label.text = "Count: \(count)"
     onCountChanged?(count)
   }
 
+  @objc
   func setInitialCount(_ initialCount: Int) {
     count = initialCount
     label.text = "Count: \(count)"
